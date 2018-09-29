@@ -1,0 +1,31 @@
+<html style="background-color: #0A110E;">
+<link rel="stylesheet" type="text/css" href="animate.css">
+
+<div id="header" class="" style="background-color: #1B2331;width: 100%;height: 80px;position: fixed;z-index: 1;">
+<input placeholder="Search for Snippet" id="input" type="text" style="border: 0px solid;color:rgb(118, 129, 150);background-color: #0A110E;width: 90%;height: 35px;font-size: 20px;margin-left:5%;margin-top:20px;text-indent: 10px;">
+</div>
+<div id="main" style="width:100%;margin-bottom:50px;color: white;padding-top:80px;-webkit-user-drag: none;z-index:-1;font-family: Helvetica Neue;"></div>
+<div id="footer" style="position:fixed;bottom:0;width: 100%;background-color: #1B2331;height: 40px;">
+<a style="font-size:18px;color:#C6C6C6;font-family: Helvetica Neue;line-height: 35px;padding-left: 10px;cursor: pointer;">Open Editor</a>
+<a onclick="quit()" style="font-size:18px;color:#C6C6C6;font-family: Helvetica Neue;line-height: 35px;padding-left: 50%;cursor: pointer;">Quit</a>
+</div>
+<style>
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<script src="index.js"></script>
+<style>
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+</style>
+
+</html>
