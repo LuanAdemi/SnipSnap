@@ -28,8 +28,9 @@ app.on('ready', () => {
         adapter = new FileSync('db.json')
         db = low(adapter)
         db.defaults({ snippets: [], count: {} }).write()
-        db.get('snippets').push({ id: 1, title: 'Arduino SD',tags: 'arduino,sd',used: 0,code:'import SD'}).write()
+        db.get('snippets').push({ id: 1, title: 'Arduino SD',tags: 'arduino,sd',used: 0,code:'import SD',colors:'black,black'}).write()
         db.set('count.count', 1).write()
+        signale.success('Created new DB!')
     } else {
         console.log('Some other error: ', err.code);
     }

@@ -31,6 +31,11 @@ var elem = undefined
 var searchinput = undefined
 var css = 'div elem:hover{ background-color: #00ff00 }';
 var style = document.createElement('style');
+const {clipboard} = require('electron')
+var buttons = []
+
+adapter = new FileSync('db.json')
+db = low(adapter)
 
 document.getElementById("header").hidden = true
 ipcRenderer.on('windowisfocused', () => {
@@ -91,6 +96,13 @@ function search() {
                     elem.innerHTML = "<div>" + currentsnippet.title + "</div>"
                     elem.style.cssText = 'width:95%;height:100px;background:#151B26;margin-left:2.5%;margin-top:10px;color:#24D4F8;line-height:30px;text-indent: 10px;float-left;';
                     document.getElementById("main").appendChild(elem);
+                    var copybutton = document.createElement("button")
+                    copybutton.classList.add("button" + i)
+                    copybutton.name = i +1
+                    copybutton.innerHTML = `<img src='copy.png' width='20px' style='pointer-events: none; name='${copybutton.name}'>`
+                    copybutton.style.cssText = "float:right;border:0px solid;background-color:#24D4F8;color:151B26;width:80px;height:40px;cursor:pointer;border-radius:10px;margin-right:10px;margin-bottom:10px;"
+                    buttons.push(copybutton)
+                    elem.appendChild(copybutton)
                     var tags = currentsnippet.tags.split(',');
                     var tagcolors = currentsnippet.colors.split(',');
                     for (e = 0; e < tags.length; e++) {
@@ -138,20 +150,59 @@ function showMainScreen() {
         elem.innerHTML = "<div>" + currentsnippet.title + "</div>"
         elem.style.cssText = 'width:95%;height:100px;background:#151B26;margin-left:2.5%;margin-top:10px;color:#24D4F8;line-height:30px;text-indent: 10px;float-left;';
         document.getElementById("main").appendChild(elem);
+        var copybutton = document.createElement("button")
+            copybutton.classList.add("button" + i)
+            copybutton.name = i +1
+            copybutton.innerHTML = `<img src='copy.png' width='20px' style='pointer-events: none; name='${copybutton.name}'>`
+            copybutton.style.cssText = "float:right;border:0px solid;background-color:#24D4F8;color:151B26;width:80px;height:40px;cursor:pointer;border-radius:10px;margin-right:10px;margin-bottom:10px;"
+            buttons.push(copybutton)
+        
+        elem.appendChild(copybutton)
         for (t = 0; t < tags.length; t++) {
             var tagdiv = document.createElement('div');
             tagdiv.style.cssText = "position:relative;display:inline-block;text-indent:0px;border-radius:50px;min-width:40px;text-align:center;height:30px;margin-left:10px;margin-top:25px;"
             tagdiv.style.backgroundColor = tagcolors[t]
             tagdiv.style.color = "white"
             tagdiv.innerHTML = '<a style="padding-left:10px;padding-right:10px;">' + tags[t] + '</a>'
+            
             elem.appendChild(tagdiv)
            
             
             
         }
     }
+    
 }
 
 function quit() {
     ipcRenderer.send("quit")
 }
+
+window.onclick = e => {
+    var clickedelement = e.target
+    if (clickedelement.tagName == "BUTTON" || clickedelement.tagName == "IMG"){
+        //signale.log(clickedelement.name)
+        var text = db.get('snippets').find({id: parseInt(clickedelement.name)}).value()
+        //signale.log(text)
+        clipboard.writeText(text.code)
+        
+        document.getElementById("copied").classList.remove("fadeOut")
+        document.getElementById("copied").hidden = false
+        document.getElementById("copied").classList.add("animated")
+        document.getElementById("copied").classList.add("fadeIn")
+        var audio = new Audio('pling.mp3');
+        audio.play();
+        setTimeout(function(){
+            document.getElementById("copied").classList.remove("fadeIn")
+            document.getElementById("copied").classList.add("fadeOut")
+
+        }, 2000);
+       
+        
+        
+    }
+} 
+
+
+        
+
