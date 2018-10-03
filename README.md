@@ -17,7 +17,6 @@ npm start
 
 Here is a weekly image of the project:
 
-Inline-style: 
 ![alt text](https://github.com/LuanAdemi/SnipSnap/raw/master/weekly_image.png "Weekly Image")
 
 
