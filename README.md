@@ -18,6 +18,6 @@ npm start
 Here is a weekly image of the project:
 
 Inline-style: 
-![alt text](https://github.com/LuanAdemi/SnipSnap/master/README/weekly_image.png "Weekly Image")
+![alt text](https://github.com/LuanAdemi/SnipSnap/raw/master/README/weekly_image.png "Weekly Image")
 
 
