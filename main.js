@@ -38,7 +38,7 @@ app.on('ready', () => {
 })
 
 const createTray = () => {
-  tray = new Tray(path.join('tray.png'))
+  tray = new Tray(path.join('assets/tray.png'))
   tray.on('click', function (event) {
     toggleWindow()
   });

@@ -99,7 +99,7 @@ function search() {
                     var copybutton = document.createElement("button")
                     copybutton.classList.add("button" + i)
                     copybutton.name = i +1
-                    copybutton.innerHTML = `<img src='copy.png' width='20px' style='pointer-events: none; name='${copybutton.name}'>`
+                    copybutton.innerHTML = `<img src='assets/copy.png' width='20px' style='pointer-events: none; name='${copybutton.name}'>`
                     copybutton.style.cssText = "float:right;border:0px solid;background-color:#24D4F8;color:151B26;width:80px;height:40px;cursor:pointer;border-radius:10px;margin-right:10px;margin-bottom:10px;"
                     buttons.push(copybutton)
                     elem.appendChild(copybutton)
@@ -137,7 +137,7 @@ function showMainScreen() {
     var sinppetcount = db.get('count.count').value()
     signale.debug('Got', sinppetcount, 'Snippets');
     if (sinppetcount == 0) {
-        document.getElementById("main").innerHTML = '<img src="space.png" width="100%" style="-webkit-user-drag: none">'
+        document.getElementById("main").innerHTML = '<img src="assets/space.png" width="100%" style="-webkit-user-drag: none">'
     }
     for (i = 0; i < sinppetcount; i++) {
         var currentsnippet = db.get('snippets').find({
@@ -153,7 +153,7 @@ function showMainScreen() {
         var copybutton = document.createElement("button")
             copybutton.classList.add("button" + i)
             copybutton.name = i +1
-            copybutton.innerHTML = `<img src='copy.png' width='20px' style='pointer-events: none; name='${copybutton.name}'>`
+            copybutton.innerHTML = `<img src='assets/copy.png' width='20px' style='pointer-events: none; name='${copybutton.name}'>`
             copybutton.style.cssText = "float:right;border:0px solid;background-color:#24D4F8;color:151B26;width:80px;height:40px;cursor:pointer;border-radius:10px;margin-right:10px;margin-bottom:10px;"
             buttons.push(copybutton)
         
@@ -178,7 +178,10 @@ function quit() {
     ipcRenderer.send("quit")
 }
 
+
+
 window.onclick = e => {
+    //signale.log(e.target.tagName)
     var clickedelement = e.target
     if (clickedelement.tagName == "BUTTON" || clickedelement.tagName == "IMG"){
         //signale.log(clickedelement.name)
@@ -190,14 +193,24 @@ window.onclick = e => {
         document.getElementById("copied").hidden = false
         document.getElementById("copied").classList.add("animated")
         document.getElementById("copied").classList.add("fadeIn")
-        var audio = new Audio('pling.mp3');
+        document.getElementById("darkener").classList.remove("fadeOut")
+        document.getElementById("darkener").hidden = false
+        document.getElementById("darkener").classList.add("animated")
+        document.getElementById("darkener").classList.add("fadeIn")
+        var audio = new Audio('assets/pling.mp3');
         audio.play();
         setTimeout(function(){
             document.getElementById("copied").classList.remove("fadeIn")
             document.getElementById("copied").classList.add("fadeOut")
+            document.getElementById("darkener").classList.remove("fadeIn")
+            document.getElementById("darkener").classList.add("fadeOut")
+        setTimeout(function(){
+            document.getElementById("copied").hidden = true
+            document.getElementById("darkener").hidden = true
+        },1000)
 
         }, 2000);
-       
+        
         
         
     }
