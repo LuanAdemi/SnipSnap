@@ -1,0 +1,25 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "title": "Arduino SD",
+      "tags": "arduino,sd",
+      "used": 0,
+      "code": "digitalWrite(1,HIGH)",
+      "colors": "#25C3FC,black",
+      "laguage":"arduino"
+    },
+    {
+      "id": 2,
+      "title": "Electron Tray",
+      "tags": "electron",
+      "used": 0,
+      "code": "const createTray = () => {\ntray = new Tray(path.join('assets/tray.png'))\ntray.on('click', function (event) {\ntoggleWindow()\n});\n}\n",
+      "colors": "#25C3FC,black",
+      "laguage":"js"
+    }
+  ],
+  "count": {
+    "count": 2
+  }
+}

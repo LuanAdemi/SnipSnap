@@ -216,6 +216,9 @@ window.onclick = e => {
     }
 } 
 
+function openeditor() {
+    ipcRenderer.send("open-editor-window")
+}
 
         
 

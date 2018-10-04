@@ -11,7 +11,7 @@ let tray = undefined
 let window = undefined
 
 // Don't show the app in the doc
-app.dock.hide()
+//
 
 
 
@@ -81,6 +81,28 @@ const createWindow = () => {
   })
 }
 
+
+const createEditor = () => {
+  editorwindow = new BrowserWindow({
+    width: 1280,
+    height: 800,
+    frame: true,
+    fullscreenable: false,
+    resizable: true,
+    titleBarStyle: 'hiddenInset',
+    webPreferences: {
+      backgroundThrottling: false
+    }
+  })
+  editorwindow.loadURL(`file://${path.join(__dirname, 'editor.html')}`)
+  //window.toggleDevTools();
+  // Hide the window when it loses focus
+  editorwindow.on('blur', () => {
+  editorwindow.close();
+  })
+
+}
+
 const toggleWindow = () => {
   window.isVisible() ? window.hide() : showWindow();
 }
@@ -97,4 +119,8 @@ ipcMain.on('show-window', () => {
 })
 ipcMain.on('quit', () => {
   app.quit();
+})
+
+ipcMain.on('open-editor-window', () => {
+  createEditor()
 })
